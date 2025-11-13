@@ -63,7 +63,7 @@ void clientNet::do_connect(const tcp::resolver::results_type &endpoint) {
 	asio::async_connect(socket_, endpoint,
 			[this](const boostError &er, tcp::endpoint) {
 				if (!er) {
-					logAction("connected to server");
+					//logAction("connected to server");
 					do_write_name_to_server();
 				} else {
 					throw prependError("client::do_connect()", er);
@@ -103,7 +103,7 @@ void clientNet::do_write() {
 	asio::async_write(socket_, message.toBuffers(),
 			[this](const boostError &er, size_t len) {
 				if (!er) {
-					logAction("wrote ", len, " bytes to server");
+					//logAction("wrote ", len, " bytes to server");
 					do_readStdIn();
 				} else {
 					throw prependError("client::do_write()", er);
@@ -161,7 +161,7 @@ void clientNet::processInputMessage() {
 void clientNet::processSetReciverId() {
 	setReciverId msg = inputMessage.getObject<setReciverId>();
 	id = msg.id;
-	logAction("id set to ", id);
+	//logAction("id set to ", id);
 	textMessage reportMsg("set self network Id to " + std::to_string(msg.id));
 	serializedMessage<messageTypeMap> ser(reportMsg,
 			inputMessage.header.metaData);

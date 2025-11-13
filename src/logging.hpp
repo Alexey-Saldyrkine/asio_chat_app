@@ -10,7 +10,7 @@ void logError(Args &&... args) {
 
 template<typename ... Args>
 void logAction(Args &&... args) {
-//	(std::cout<<...<<args) << "\n";
+	(std::cout<<...<<args) << "\n";
 }
 
 std::runtime_error prependError(const char *where, const boostError &er) {

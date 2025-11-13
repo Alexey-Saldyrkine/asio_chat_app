@@ -260,7 +260,7 @@ struct textOutputBox: button_interface {
 	std::string textMessageToOutput(const textMessage &msg,
 			const messageMetaData &data) {
 		std::string ret = "";
-		ret += "\nfrom " + idToName(data.from) + ": " + msg.str;
+		ret += "from " + idToName(data.from) + ": " + msg.str+"\n";
 		return ret;
 	}
 

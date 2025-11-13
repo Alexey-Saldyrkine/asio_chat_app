@@ -80,6 +80,7 @@ private:
 		for (auto it : serverdata.sessions) {
 			vec.emplace_back(it.first, it.second->name);
 		}
+		std::sort(vec.begin(),vec.end());
 		return clientList(vec);
 	}
 
@@ -152,12 +153,12 @@ void session::processInputMessage() {
 void session::processSetSenderName() {
 	auto msg = inputMessage.getObject<setSenderName>();
 	name = msg.userName;
-	logAction("recived setSenderName on id: ", id, ", name: ", msg.userName);
+	logAction("recived new user name on id: ", id, ", name: ", msg.userName);
 	do_read();
 }
 void session::processTextMessage() {
 	auto msg = inputMessage.getObject<textMessage>();
-	logAction("recived TextMessage on id: ", id, ", msg: ", msg.str);
+	logAction("recived TextMessage on id: ", id," to ",inputMessage.header.metaData.to, ", msg: ", msg.str);
 	if (inputMessage.header.metaData.to == serverdata.serverId) {
 		do_echo_inputMessage();
 	} else {
